@@ -19,12 +19,12 @@ module.exports = merge(baseConfig, {
     filename: 'bundle.client.js',
     chunkFilename: '[name].bundle.js'
   },
-  // optimization: {
-  //   splitChunks: {
-  //     name: "manifest",
-  //     minChunks: Infinity
-  //   }
-  // },
+  optimization: {
+    splitChunks: {
+      name: "manifest",
+      minChunks: Infinity
+    }
+  },
   plugins: [
     // 此插件在输出目录中
     // 生成 `vue-ssr-client-manifest.json`。

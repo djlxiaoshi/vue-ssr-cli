@@ -8,6 +8,9 @@ function resolve(dir) {
 }
 
 module.exports = {
+  resolve: {
+    extensions: ['.js', '.vue', '.json']
+  },
   module: {
     rules: [
       {

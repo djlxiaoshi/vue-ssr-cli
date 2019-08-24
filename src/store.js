@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 // 显示设置打开vue调试工具
 // https://github.com/vuejs/vue-devtools/issues/190
