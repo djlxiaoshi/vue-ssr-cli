@@ -17,12 +17,14 @@ const router = new koaRouter();
 const serverBundle = require('./dist/vue-ssr-server-bundle');
 const renderer = createBundleRenderer(serverBundle, {
   runInNewContext: false,
-  template: fs.readFileSync(resolve('./dist/index.ssr.html'), 'utf-8'),
+  template: fs.readFileSync(resolve('./dist/index.server.html'), 'utf-8'),
   clientManifest: require('./dist/vue-ssr-client-manifest.json'),
 });
 
+// 先匹配静态资源
 app.use(koaStatic(path.resolve(__dirname, 'dist')));
 
+// 静态资源没有匹配到的时候，再走这个服务端路由
 router.get('*', async ctx => {
 
   ctx.body = await new Promise((resolve, reject) => {
@@ -30,7 +32,7 @@ router.get('*', async ctx => {
 
       if (err) {
         console.log('error', err);
-        resolve(err.code);
+        resolve(err.code); // 我们可以在前端路由中始终配置404页面
         return;
       }
 

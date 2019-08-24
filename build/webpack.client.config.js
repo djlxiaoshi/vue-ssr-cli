@@ -3,21 +3,17 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.config.js');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-
-function resolve (dir) {
-  return path.resolve(__dirname, '..', dir);
-}
+const { basePath, resolve } = require('./config');
 
 module.exports = merge(baseConfig, {
   entry: {
-    client: resolve('src/entry-client.js'),
+    client: resolve(__dirname, '..', 'src/entry-client.js'),
   },
   // 此处告知 server bundle 使用 Node 风格导出模块(Node-style exports)
   output: {
-    path: path.join(__dirname, '..', 'dist'),
-    filename: 'bundle.client.js',
-    chunkFilename: '[name].bundle.js'
+    path: resolve(__dirname, '..', 'dist'),
+    filename: resolve(basePath, 'js/[name].[hash:8].js'),
+    chunkFilename: resolve(basePath, 'js/[name].[hash:8].js')
   },
   optimization: {
     splitChunks: {
@@ -31,7 +27,7 @@ module.exports = merge(baseConfig, {
     new VueSSRClientPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.client.html',
-      template: resolve('./index.client.html')
+      template: resolve(__dirname, '..', './index.client.html')
     })
   ]
 });

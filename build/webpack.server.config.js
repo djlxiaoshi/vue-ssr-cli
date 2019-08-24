@@ -4,15 +4,12 @@ const baseConfig = require('./webpack.base.config.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 const path = require('path');
-
-function resolve (dir) {
-  return path.resolve(__dirname, '..', dir);
-}
+const { basePath, resolve } = require('./config');
 
 module.exports = merge(baseConfig, {
   // 将 entry 指向应用程序的 server entry 文件
   entry: {
-    server: resolve('src/entry-server.js')
+    server: resolve(__dirname, '..', 'src/entry-server.js')
   },
 
   // 这允许 webpack 以 Node 适用方式(Node-appropriate fashion)处理动态导入(dynamic import)，
@@ -26,9 +23,9 @@ module.exports = merge(baseConfig, {
   // 此处告知 server bundle 使用 Node 风格导出模块(Node-style exports)
   output: {
     libraryTarget: 'commonjs2',
-    path: path.join(__dirname, '..', 'dist'),
-    filename: 'bundle.server.js',
-    chunkFilename: '[name].bundle.js'
+    path: resolve(__dirname, '..', 'dist'),
+    filename: resolve(basePath, 'js/[name].[hash:8].js'),
+    chunkFilename: resolve(basePath, 'js/[name].[hash:8].js')
   },
 
   // https://webpack.js.org/configuration/externals/#function
@@ -48,8 +45,8 @@ module.exports = merge(baseConfig, {
   plugins: [
     new VueSSRServerPlugin(),
     new HtmlWebpackPlugin({
-      filename: 'index.ssr.html',
-      template: resolve('./index.ssr.html'),
+      filename: 'index.server.html',
+      template: resolve(__dirname, '..', './index.server.html'),
       excludeChunks: ['server']
     })
   ]

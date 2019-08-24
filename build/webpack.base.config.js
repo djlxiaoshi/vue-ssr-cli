@@ -1,11 +1,5 @@
-const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
-const projectRoot = path.resolve(__dirname, '..', 'src');
-const basePath = 'static/';
-
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
+const { basePath, resolve } = require('./config');
 
 module.exports = {
   resolve: {
@@ -20,7 +14,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: resolve('src'),
+        include: resolve(__dirname, '..', 'src'),
         exclude: /node_modules/
       },
       {
@@ -35,7 +29,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          name: `${basePath}images/[name]-[hash:8].[ext]`,
+          name: resolve(basePath, 'images/[name]-[hash:8].[ext]'),
           limit: 10000
         }
       },
@@ -51,7 +45,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: `${basePath}fonts/[name].[hash:7].[ext]`
+          name: resolve(basePath, 'fonts/[name].[hash:7].[ext]')
         }
       }
     ]
@@ -59,8 +53,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     modules: [
-      resolve('src'),
-      resolve('node_modules')
+      resolve(__dirname, '..', 'src'),
+      resolve(__dirname, '..', 'node_modules')
     ],
     alias: {
       'vue$': 'vue/dist/vue.runtime.esm.js'
