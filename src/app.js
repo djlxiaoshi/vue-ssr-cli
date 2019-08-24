@@ -3,8 +3,13 @@ import App from './App.vue';
 import { createStore } from './store';
 import { createRouter } from './router';
 import { sync } from 'vuex-router-sync';
+import { Button, Select } from 'element-ui';
 
 Vue.config.productionTip = false; // 开启vuex 调试工具
+
+console.log('Vue.prototype.$isServer', Vue.prototype.$isServer);
+
+Vue.use(Button);
 
 export function createApp (context) {
 

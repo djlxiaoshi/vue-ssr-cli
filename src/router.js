@@ -11,6 +11,7 @@ export function createRouter () {
     routes: [
       { path: '/', component: () => import(/* webpackChunkName: "home" */'./components/Home.vue') },
       { path: '/about', component: () => import(/* webpackChunkName: "about" */'./components/About.vue') },
+      { path: '/element', component: () => import(/* webpackChunkName: "about" */'./components/Element.vue') },
       { path: '**', component: NotFount }
     ]
   });

@@ -24,6 +24,10 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.css$/,
+        use: ["vue-style-loader", "css-loader"]
+      },
+      {
         test: /\.less$/,
         use: ["vue-style-loader", "css-loader", "less-loader"] // 由于要使用ssr，这里使用vue-style-loader来替换style-loader
       },
