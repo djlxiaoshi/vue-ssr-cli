@@ -49,9 +49,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "dev": "npm-run-all build-client build-server server",
+    "dev": "webpack-dev-server --config ./build/webpack.dev.config.js --mode development",
     "server": "nodemon --inspect ./server.js",
-    "dev-client": "webpack-dev-server --config ./build/webpack.client.config.js --mode development",
     "build-client": "webpack --config ./build/webpack.client.config.js --watch --mode production --progress",
     "build-server": "webpack --config ./build/webpack.server.config.js --watch --mode production --progress",
     "build": "npm-run-all build-client build-server"
