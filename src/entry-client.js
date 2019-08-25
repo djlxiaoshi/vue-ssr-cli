@@ -1,4 +1,5 @@
 import { createApp } from './app';
+import './register-sw';
 
 // 客户端特定引导逻辑……
 

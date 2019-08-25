@@ -22,7 +22,9 @@ const renderer = createBundleRenderer(serverBundle, {
 });
 
 // 先匹配静态资源
-app.use(koaStatic(path.resolve(__dirname, 'dist')));
+app.use(koaStatic(path.resolve(__dirname, 'dist'), {
+  index: 'test.html' // 这里不是index.html就行  否则会先返回index.html的静态资源
+}));
 
 // 静态资源没有匹配到的时候，再走这个服务端路由
 router.get('*', async ctx => {
