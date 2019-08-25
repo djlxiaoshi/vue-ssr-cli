@@ -1,0 +1,17 @@
+{
+  "name"              : "Vue-SSR-Cli",
+  "short_name"        : "Vue-SSR",
+  "description"       : "Vue-SSR-Cli",
+  "start_url"         : "index.html",
+  "display"           : "standalone",
+  "orientation"       : "any",
+  "background_color"  : "#ACE",
+  "theme_color"       : "#ACE",
+  "icons": [
+    {
+      "src"           : "/static/favorite.png",
+      "sizes"         : "144x144",
+      "type"          : "image/png"
+    }
+  ]
+}

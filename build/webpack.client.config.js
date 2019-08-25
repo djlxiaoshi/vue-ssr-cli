@@ -46,6 +46,11 @@ module.exports = merge(baseConfig, {
               statuses: [0, 200]
             }
           }
+        },
+        {
+          // 其他静态资源
+          urlPattern: new RegExp('/static'),
+          handler: 'CacheFirst'
         }
       ]
     })

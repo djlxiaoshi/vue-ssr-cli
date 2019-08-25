@@ -1,5 +1,9 @@
 const { VueLoaderPlugin } = require('vue-loader');
 const { basePath, resolve } = require('./config');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const NODE_ENV = process.env.NODE_ENV;
 
 module.exports = {
   resolve: {
@@ -61,6 +65,22 @@ module.exports = {
     }
   },
   plugins: [
+    // NODE_ENV === 'production'?
+    // new CleanWebpackPlugin({
+    //   verbose: true,
+    //   dry: false
+    // }) : '',
+    new CopyWebpackPlugin([{
+      from: resolve(__dirname, '..', '/static'),
+      to: resolve(__dirname, '..', 'dist/static'),
+      ignore: ['.*']
+    }]),
+    // 复制manifest.json
+    new CopyWebpackPlugin([{
+      from: resolve(__dirname, '..', 'manifest.json'),
+      to: resolve(__dirname, '..', 'dist'),
+      ignore: ['.*']
+    }]),
     new VueLoaderPlugin()
   ]
 };
