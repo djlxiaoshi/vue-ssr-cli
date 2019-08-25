@@ -57,7 +57,7 @@
     "server": "nodemon --inspect ./server.js",
     "build-client": "cross-env NODE_ENV=production webpack --config ./build/webpack.client.config.js --watch --mode production --progress",
     "build-server": "cross-env NODE_ENV=production webpack --config ./build/webpack.server.config.js --watch --mode production --progress",
-    "build": "npm-run-all build-client build-server"
+    "build": "npm-run-all build-server"
   },
   "author": "",
   "license": "ISC"
